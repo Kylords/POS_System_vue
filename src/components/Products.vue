@@ -91,7 +91,7 @@ const selectedProduct = ref(false)
 function viewProduct(productId, product) {
     // router.push({ name: 'productview', params: { id: productId } });
     vari.value.productId = Number(productId)
-    refetchProduct()
+    refetchProduct({ productId: Number(productId) })
     details.value.productId = productId
     selectedProduct.value = true
 
@@ -230,7 +230,7 @@ function edit(id) {
 
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        v-if="resultProductQuery">
+        v-if="resultProductQuery && resultProductQuery.product">
 
 
         <div class="modal-dialog">

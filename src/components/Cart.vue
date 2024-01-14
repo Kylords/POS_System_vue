@@ -9,29 +9,14 @@ const router = useRouter();
 
 const bus = inject(['$bus'])
 
-
-onMounted(() => {
-  bus.$on('checkout', (value) => {
-    refetch()
-  })
-
-  
-})
-
-
 import ActionCable from 'actioncable';
 
 
 const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
 
-
 const queryOptions = ref({
     fetchPolicy: 'cache-and-network'
 })
-
-
-
-
 const { result: resultCartQuery, loading: loadingCartQuery, refetch, onResult } = useQuery(gql`
   query {
     cart {
@@ -52,15 +37,23 @@ const { result: resultCartQuery, loading: loadingCartQuery, refetch, onResult } 
   }
 `, null, queryOptions);
 
-onResult(result => {
-    if (!result.loading) {
-        cable.subscriptions.create('NotificationChannel', {
-            received(data) {
-                refetch()
-            }
-        });
-    }
+onMounted(() => {
+    bus.$on('checkout', (value) => {
+        refetch()
+    })
+
+    cable.subscriptions.create('NotificationChannel', {
+        received(data) {
+            refetch()
+        }
+    });
 })
+
+
+
+
+
+
 
 
 
@@ -273,10 +266,13 @@ const cartPrice = ref(0)
         </div>
         <div>
             <hr>
-            <div v-for="(cartItem,index) in resultCartQuery.cart.cartItems">
+            <div v-for="(cartItem, index) in resultCartQuery.cart.cartItems">
 
-                <h5 :class="{ 'd-flex': true, 'justify-content-between': index > 0, 'justify-content-end': index === 0, 'text-muted': true }"><span v-if="index > 0">+</span><span>{{ cartItem.totalPrice }}</span></h5>
-                
+                <h5
+                    :class="{ 'd-flex': true, 'justify-content-between': index > 0, 'justify-content-end': index === 0, 'text-muted': true }">
+                    <span v-if="index > 0">+</span><span>{{ cartItem.totalPrice }}</span>
+                </h5>
+
 
             </div>
             <hr>
@@ -285,9 +281,9 @@ const cartPrice = ref(0)
         <div class="my-2">
             <h4 class="d-flex justify-content-between"><span class="text-muted">Cart Price:</span> <span>₱{{
                 resultCartQuery.cart.totalPrice }}</span></h4>
-            
+
         </div>
-        
+
         <div>
             <p class="continue" @click="checkout">Continue <i class="bi bi-arrow-right"></i> </p>
         </div>

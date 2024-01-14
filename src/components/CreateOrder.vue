@@ -27,7 +27,7 @@ function clickTab(tab) {
                 <li v-for="(tab, index) in tabs" :key="index" class="nav-item" role="presentation">
                     <button :class="{ 'nav-link': true, 'active': tab === selectedTab }" :id="`pills-${index}-tab`"
                         data-bs-toggle="pill" :data-bs-target="`#pills-${index}`" type="button" role="tab"
-                        :aria-controls="`pills-${index}`" :aria-selected="index === selectedIndex" @click="clickTab(tab)">
+                        :aria-controls="`pills-${index}`" :aria-selected="tab === selectedTab" @click="clickTab(tab)">
                         {{ tab }}
                     </button>
                 </li>

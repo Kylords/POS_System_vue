@@ -53,7 +53,7 @@ const { result: resultDeliveryQuery, loading: loadingDeliveryQuery } = useQuery(
   }
 `, null, queryOptions);
 
-const { result: resultPaymentQuery, loading: loadingPaymentQuery } = useQuery(gql`
+const { result: resultPaymentQuery, refetch: onPaymentRefetch } = useQuery(gql`
   query {
     paymentMethods {
       id
@@ -176,6 +176,7 @@ async function orderClick() {
         if (result.data.createOrder.errors == 0) {
             orderSuccess.value = true
             order.value = result.data.createOrder.order
+            orderId.value = result.data.createOrder.order.id
             placeOrder.value.deliveryId = ''
             placeOrder.value.paymentId = ''
 
@@ -188,6 +189,7 @@ async function orderClick() {
                 order.value = null
                 mySelectDelivery.value = null
                 mySelectedPayment.value = null
+                orderId.value = 0
             });
 
         }
@@ -566,7 +568,7 @@ function showMobileTrue() {
                         <hr>
                         <p>Subtotal: {{ resultCartQuery.cart.totalPrice }}</p>
                         <p>Shipping Fee: {{ mySelectDelivery.price }}</p>
-                        <p>Convenience Fee: 0</p>
+                        <p>Convenience Fee: ₱50</p>
                         <hr>
                         <h5>Grand Total: {{ Number(resultCartQuery.cart.totalPrice) + Number(mySelectDelivery.price) + 50 }}
                         </h5>

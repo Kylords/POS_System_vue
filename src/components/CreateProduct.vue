@@ -36,7 +36,6 @@ const openCloudinaryWidget = () => {
         if (!error && result && result.event === 'success') {
             // Handle the success event and update your component state
             product.value.image = result.info.secure_url;
-            console.log(result.info.secure_url)
         }
     });
 
