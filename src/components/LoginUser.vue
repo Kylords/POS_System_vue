@@ -70,6 +70,6 @@ async function login() {
         <label for="password">Password:</label>
         <input v-model="password" type="password" id="password" required>
 
-        <button type="submit">Login</button>
+        <button class="btn btn-secondary" type="submit">Login</button>
     </form>
 </template>

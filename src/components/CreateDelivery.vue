@@ -85,7 +85,7 @@ const submitForm = async () => {
             
 
             
-            <button type="submit">Create Delivery</button>
+            <button  class="btn btn-secondary" type="submit">Create Delivery</button>
         </form>
 
     </div>

@@ -114,7 +114,7 @@ const submitForm = async () => {
 
             
 
-            <button type="submit">Finish Editing</button>
+            <button class="btn btn-secondary" type="submit">Finish Editing</button>
         </form>
 
     </div>

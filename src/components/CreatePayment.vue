@@ -81,7 +81,7 @@ const submitForm = async () => {
             
 
             
-            <button type="submit">Create Payment</button>
+            <button class="btn btn-secondary" type="submit">Create Payment</button>
         </form>
 
     </div>

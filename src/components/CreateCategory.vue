@@ -73,7 +73,7 @@ const submitForm = async () => {
             <input v-model="category.name" type="text" id="name" required>
 
             
-            <button type="submit">Create Category</button>
+            <button class="btn btn-secondary" type="submit">Create Category</button>
         </form>
 
     </div>

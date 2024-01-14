@@ -177,7 +177,7 @@ const submitForm = async () => {
             <label for="image">Image:</label>
             <button type="button" @click="openCloudinaryWidget">Upload Images</button>
 
-            <button type="submit">Create Room Type</button>
+            <button class="btn btn-secondary" type="submit">Finish Editting</button>
         </form>
 
     </div>

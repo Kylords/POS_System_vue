@@ -131,7 +131,7 @@ const { result: resultCategoryQuery, loading: loadingCategoryQuery } = useQuery(
             <label for="image">Image:</label>
             <button type="button" @click="openCloudinaryWidget">Upload Images</button>
 
-            <button type="submit" >Create Room Type</button>
+            <button class="btn btn-secondary" type="submit" >Create Product</button>
         </form>
 
     </div>
