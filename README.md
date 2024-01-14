@@ -28,3 +28,4 @@ npm run dev
 npm run build
 ```
 # pos_system_vue
+# POS_System_vue
