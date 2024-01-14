@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const vari = ref({
-    productId: 1
+    productId: null
 })
 
 const details = ref({
@@ -99,7 +99,7 @@ function viewProduct(productId, product) {
 
 
 const { result: resultProductQuery, loading: loadingProductQuery, refetch: refetchProduct, onResult: onProductResult } = useQuery(gql`
-  query($productId: Int!) {
+  query($productId: Int) {
     product(productId: $productId) {
       id
       name
