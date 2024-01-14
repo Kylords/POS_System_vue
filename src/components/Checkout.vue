@@ -96,6 +96,21 @@ function selectOrderOption(option) {
     placeOrder.value.orderType = option
     if (option = "In-Store") {
         placeOrder.value.province = ''
+        placeOrder.value.city = ''
+        placeOrder.value.baranggay = ''
+        placeOrder.value.street = ''
+
+        placeOrder.value.roomUnit = ''
+        placeOrder.value.floor = ''
+        placeOrder.value.building = ''
+        placeOrder.value.nearestLandmark = ''
+        placeOrder.value.remarks = ''
+
+        placeOrder.value.deliveryId = 1
+
+        deliveryFee.value = 0
+        shippingButtonValue.value = false
+        mySelectDelivery.value = {deliveryMethod: 'In-store', price: '0'}
     }
 }
 
@@ -369,13 +384,15 @@ function showMobileTrue() {
 
                 <div class="input-div row">
                     <label for="province">Email: *</label>
-                    <input type="text" v-model="placeOrder.email" placeholder="Email" class="form-control" @input="showEmailTrue" @change="showEmailTrue">
+                    <input type="text" v-model="placeOrder.email" placeholder="Email" class="form-control"
+                        @input="showEmailTrue" @change="showEmailTrue">
                     <ul v-if="emailSuggestions.length > 0 && placeOrder.email !== '' && infoResult && showSuggestedEmails"
                         class="suggestions-list">
-                        <li class="suggestion-product" v-for="email in emailSuggestions.filter(item => item.email.toLowerCase().includes(placeOrder.email))" :key="email.id"
-                            @click="clickEmail(email)" >
+                        <li class="suggestion-product"
+                            v-for="email in emailSuggestions.filter(item => item.email.toLowerCase().includes(placeOrder.email))"
+                            :key="email.id" @click="clickEmail(email)">
                             {{ email.email }}
-                            
+
                         </li>
 
                     </ul>
@@ -383,13 +400,15 @@ function showMobileTrue() {
 
                 <div class="input-div row">
                     <label for="province">Mobile: *</label>
-                    <input type="text" v-model="placeOrder.mobile" placeholder="Mobile" class="form-control" @input="showMobileTrue" @change="showMobileTrue">
+                    <input type="text" v-model="placeOrder.mobile" placeholder="Mobile" class="form-control"
+                        @input="showMobileTrue" @change="showMobileTrue">
                     <ul v-if="mobileSuggestions.length > 0 && placeOrder.mobile !== '' && infoMobileResult && showSuggestedMobiles"
                         class="suggestions-list">
-                        <li class="suggestion-product" v-for="mobile in mobileSuggestions.filter(item => item.mobile.toLowerCase().includes(placeOrder.mobile))" :key="mobile.id"
-                            @click="clickMobile(mobile)" >
+                        <li class="suggestion-product"
+                            v-for="mobile in mobileSuggestions.filter(item => item.mobile.toLowerCase().includes(placeOrder.mobile))"
+                            :key="mobile.id" @click="clickMobile(mobile)">
                             {{ mobile.mobile }}
-                            
+
                         </li>
 
                     </ul>
@@ -473,7 +492,7 @@ function showMobileTrue() {
             </div>
         </div>
 
-        <div>
+        <div v-if="placeOrder.orderType == 'Online'">
             <hr>
             <h3>Delivery Method</h3>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -490,13 +509,15 @@ function showMobileTrue() {
         </div>
 
         <div v-if="shippingButtonValue && resultDeliveryQuery" class="row" style="margin: auto;">
-            <div v-for="delivery in resultDeliveryQuery.deliveryMethods" class="col-md-3 ">
-                <button v-if="delivery.enabled" class="btn btn-outline-success btn-sm"
-                    :class="{ 'selectedDelivery': placeOrder.deliveryId == delivery.id }"
-                    @click="selectDelivery(delivery.id, delivery.price, delivery)">
-                    <h6>{{ delivery.deliveryMethod }}</h6>
-                    ₱{{ delivery.price }}
-                </button>
+            <div v-for="delivery in resultDeliveryQuery.deliveryMethods" class="col">
+                    <button v-if="delivery.enabled" class="btn btn-outline-success btn-sm"
+                        :class="{ 'selectedDelivery': placeOrder.deliveryId == delivery.id }"
+                        @click="selectDelivery(delivery.id, delivery.price, delivery)">
+                        <h6>{{ delivery.deliveryMethod }}</h6>
+                        ₱{{ delivery.price }}
+                    </button>
+                
+
 
 
             </div>
@@ -518,7 +539,7 @@ function showMobileTrue() {
 
         </div>
     </div>
-    <div v-if="resultCartQuery && resultCartQuery.cart.totalPrice != 0 && deliveryFee != 0">
+    <div v-if="resultCartQuery && resultCartQuery.cart.totalPrice != 0">
 
 
         <div>
@@ -539,13 +560,13 @@ function showMobileTrue() {
         </div>
     </div>
     <button v-if="resultCartQuery" class="btn btn-secondary" @click="orderClick"
-        :disabled="(placeOrder.orderType == 'Online' && (placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == '')) || placeOrder.paymentId == '' || placeOrder.deliveryId == '' || resultCartQuery.cart.cartItems.length == 0">Place
+        :disabled="((placeOrder.orderType == 'Online' || placeOrder.deliveryId == '') && (placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == '')) || placeOrder.paymentId == '' || resultCartQuery.cart.cartItems.length == 0">Place
         Order</button>
 
 
 
     <div class="modal fade" id="OrderModal" tabindex="-1" aria-labelledby="OrderModalLabel" aria-hidden="true"
-        v-if="mySelectDelivery && mySelectedPayment">
+        v-if="mySelectedPayment">
 
 
         <div class="modal-dialog">
@@ -665,6 +686,10 @@ input {
     position: sticky;
     top: 8vh;
 
+}
+
+.flex {
+    display: flex;
 }
 </style>
 
