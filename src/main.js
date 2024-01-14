@@ -13,7 +13,7 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import { setContext } from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-    uri: 'https://pos-system-hcmk.onrender.coml',
+    uri: 'https://pos-system-hcmk.onrender.com',
     headers: {
         'X-CSRF-Token': "qU5zYiFrOrMTb3oaJ8IQaJL4Ui5YlDeMcG1mylHgOVwhEavkIcXwIyOMDFKxewJActZMrUSGCxKJT09buwRWVg",
     },
