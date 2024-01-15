@@ -46,6 +46,7 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
       id
       totalPrice
       email
+      
       delivery {
       price
     }
@@ -55,8 +56,10 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
         image
         productType
         productQuantities {
-        quantity
-      }
+          id
+          orderId
+          quantity
+        }
       }
 
     }
@@ -228,7 +231,11 @@ async function deleteItem(orderId) {
 
 
                                 <p class="fw-normal mb-2">Quantity: </p>
-                                <p class="fw-normal mb-2">{{ product.productQuantities[0].quantity }}</p>
+                                <p class="fw-normal mb-2">{{
+                                    Number(product.productQuantities &&
+                                    product.productQuantities.length > 0 &&
+                                    (product.productQuantities.find(item => Number(item.orderId) === Number(order.id))?.quantity || 0))
+                                }}</p>
 
 
                             </div>
@@ -246,7 +253,10 @@ async function deleteItem(orderId) {
 
 
                                 <p class="fw-normal mb-2">Total Product Price: </p>
-                                <p class="fw-normal mb-2">₱{{ Number(product.price) * Number(product.productQuantities[0].quantity) }}</p>
+                                <p class="fw-normal mb-2">₱{{ Number(product.price) *
+                                    Number(product.productQuantities &&
+                                    product.productQuantities.length > 0 &&
+                                    (product.productQuantities.find(item => Number(item.orderId) === Number(order.id))?.quantity || 0)) }}</p>
 
 
                             </div>
@@ -271,7 +281,7 @@ async function deleteItem(orderId) {
                     <p class="fw-normal mb-2">Total Price:</p>
                     <p class="lead fw-normal mb-2">₱{{ order.totalPrice }}</p>
                 </div>
-                
+
                 <div class="col-md-1  text-end">
                     <button type="button" class="btn-close" aria-label="Close" @click.stop="deleteItem(order.id)"></button>
 
