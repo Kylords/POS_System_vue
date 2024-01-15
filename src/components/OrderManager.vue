@@ -221,7 +221,7 @@ async function deleteItem(orderId) {
 
 
                                 <p class="fw-normal mb-2">Quantity: </p>
-                                <p class="fw-normal mb-2">{{ order.quantity }}</p>
+                                <p class="fw-normal mb-2">{{ product.quantity }}</p>
 
 
                             </div>
