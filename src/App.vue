@@ -12,7 +12,7 @@ const userId = ref(null)
 
 const userInfo = ref(null)
 
-const cable = ActionCable.createConsumer('ws://pos-system-c9294lf0r-kylords-projects.vercel.app/cable');
+
 
 const bus = inject(['$bus'])
 
