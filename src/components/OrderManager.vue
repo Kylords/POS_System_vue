@@ -45,7 +45,6 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
     allOrders(status: $status) {
       id
       totalPrice
-      quantities
       products {
         price
         name
