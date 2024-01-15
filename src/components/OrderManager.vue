@@ -252,14 +252,16 @@ async function deleteItem(orderId) {
                     </div>
 
                 </div>
-                <div class="col-md-1">
-                    <p class="fw-normal mb-2">Total Price:</p>
-                    <p class="lead fw-normal mb-2">₱{{ order.totalPrice }}</p>
-                </div>
+
                 <div class="col-md-1">
                     <p class="fw-normal mb-2">Delivery Fee:</p>
                     <p class="lead fw-normal mb-2">₱{{ order.delivery.price }}</p>
                 </div>
+                <div class="col-md-1">
+                    <p class="fw-normal mb-2">Total Price:</p>
+                    <p class="lead fw-normal mb-2">₱{{ order.totalPrice }}</p>
+                </div>
+                
                 <div class="col-md-1  text-end">
                     <button type="button" class="btn-close" aria-label="Close" @click.stop="deleteItem(order.id)"></button>
 
