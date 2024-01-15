@@ -95,22 +95,14 @@ const orderOptions = ref(["Online", "In-Store"])
 function selectOrderOption(option) {
     placeOrder.value.orderType = option
     if (option = "In-Store") {
-        placeOrder.value.province = ''
-        placeOrder.value.city = ''
-        placeOrder.value.baranggay = ''
-        placeOrder.value.street = ''
-
-        placeOrder.value.roomUnit = ''
-        placeOrder.value.floor = ''
-        placeOrder.value.building = ''
-        placeOrder.value.nearestLandmark = ''
-        placeOrder.value.remarks = ''
 
         placeOrder.value.deliveryId = 1
 
         deliveryFee.value = 0
         shippingButtonValue.value = false
         mySelectDelivery.value = {deliveryMethod: 'In-store', price: '0'}
+    } else {
+        placeOrder.value.deliveryId = ''
     }
 }
 
@@ -227,7 +219,8 @@ async function orderClick() {
 
 
 const formattedAddress = computed(() => {
-    const addressComponents = [
+    if (placeOrder.orderType == 'Online') {
+        const addressComponents = [
         placeOrder.value.roomUnit,
         placeOrder.value.floor,
         placeOrder.value.building,
@@ -239,6 +232,10 @@ const formattedAddress = computed(() => {
 
     // Filter out empty strings and join with a comma and space
     return addressComponents.filter(Boolean).join(', ');
+    } else {
+        return 'In-store'
+    }
+    
 });
 
 
@@ -560,13 +557,13 @@ function showMobileTrue() {
         </div>
     </div>
     <button v-if="resultCartQuery" class="btn btn-secondary" @click="orderClick"
-        :disabled="((placeOrder.orderType == 'Online' || placeOrder.deliveryId == '') && (placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == '')) || placeOrder.paymentId == '' || resultCartQuery.cart.cartItems.length == 0">Place
+        :disabled="(placeOrder.orderType != 'Online' || placeOrder.deliveryId == '' || placeOrder.paymentId == '' || placeOrder.deliveryId == 1) && (placeOrder.orderType != 'In-Store' || placeOrder.paymentId == '') || placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == ''">Place
         Order</button>
 
 
 
     <div class="modal fade" id="OrderModal" tabindex="-1" aria-labelledby="OrderModalLabel" aria-hidden="true"
-        v-if="mySelectedPayment">
+        v-if="(mySelectedPayment && placeOrder.orderType == 'In-Store') || (mySelectedPayment && mySelectDelivery)">
 
 
         <div class="modal-dialog">
