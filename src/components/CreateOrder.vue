@@ -1,7 +1,7 @@
 
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, onMounted } from 'vue';
 import { useMutation, useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
 
