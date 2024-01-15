@@ -46,6 +46,9 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
       id
       totalPrice
       email
+      delivery {
+      price
+    }
       products {
         price
         name
