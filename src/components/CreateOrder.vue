@@ -10,13 +10,21 @@ import Products from './Products.vue';
 import Checkout from './Checkout.vue';
 
 const tabs = ref(['Products', 'Checkout'])
-
+const bus = inject(['$bus'])
 const selectedTab = ref('Products')
 
 function clickTab(tab) {
     selectedTab.value = tab
 }
 
+
+onMounted(() => {
+    bus.$on('gotoCheckout', (value) => {
+        selectedTab.value = 'Checkout'
+    })
+
+    
+})
 </script>
 
 <template>

@@ -181,7 +181,7 @@ function checkbox(cartItemId, event, price) {
 
 
 function checkout() {
-    router.push({ path: '/checkout' });
+    bus.$emit('gotoCheckout')
 
 }
 
