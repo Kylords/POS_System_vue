@@ -557,7 +557,7 @@ function showMobileTrue() {
         </div>
     </div>
     <button v-if="resultCartQuery" class="btn btn-secondary" @click="orderClick"
-        :disabled="(placeOrder.orderType != 'Online' || placeOrder.deliveryId == '' || placeOrder.paymentId == '' || placeOrder.deliveryId == 1) && (placeOrder.orderType != 'In-Store' || placeOrder.paymentId == '') || placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == ''">Place
+        :disabled="(placeOrder.orderType != 'Online' || placeOrder.deliveryId == '' || placeOrder.paymentId == '' || placeOrder.deliveryId == 1 || placeOrder.province == '' || placeOrder.city == '' || placeOrder.baranggay == '' || placeOrder.street == '') && (placeOrder.orderType != 'In-Store' || placeOrder.paymentId == '') ">Place
         Order</button>
 
 
