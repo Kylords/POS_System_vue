@@ -200,7 +200,7 @@ async function deleteItem(orderId) {
                         @click="changeStatus('Completed', Number(order.id))">Complete Order</button>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div v-for="product in order.products" class=" p-4" :key="product.id">
 
                         <div class="row justify-content-between col-md-12">
@@ -245,7 +245,7 @@ async function deleteItem(orderId) {
                     </div>
 
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <p class="fw-normal mb-2">Total Price:</p>
                     <p class="lead fw-normal mb-2">₱{{ order.totalPrice }}</p>
                 </div>
