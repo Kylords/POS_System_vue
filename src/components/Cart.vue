@@ -12,7 +12,7 @@ const bus = inject(['$bus'])
 import ActionCable from 'actioncable';
 
 
-const cable = ActionCable.createConsumer('wss://pos-system-hcmk.onrender.com/cable');
+const cable = ActionCable.createConsumer('wss://pos-system-vue.vercel.app/cable');
 
 const queryOptions = ref({
     fetchPolicy: 'cache-and-network'
