@@ -51,7 +51,7 @@ const { result: resultProductQuery, loading: loadingProductQuery, refetch: refet
       categoryId
     }
   }
-`, vari);
+`, vari, queryOptions);
 
 
 

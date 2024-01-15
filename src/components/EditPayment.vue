@@ -35,7 +35,7 @@ const { result: resultPaymentQuery, onResult: onResultPaymentQuery } = useQuery(
       enabled
     }
   }
-`, vari);
+`, vari, queryOptions);
 
 
 

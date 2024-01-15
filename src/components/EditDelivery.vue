@@ -37,7 +37,7 @@ const { result: resultDeliveryQuery, onResult: onResultDeliveryQuery } = useQuer
       enabled
     }
   }
-`, vari);
+`, vari, queryOptions);
 
 
 
