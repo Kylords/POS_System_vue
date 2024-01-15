@@ -45,6 +45,7 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
     allOrders(status: $status) {
       id
       totalPrice
+      email
       products {
         price
         name
@@ -194,8 +195,9 @@ async function deleteItem(orderId) {
         <div>
             <div v-for="order in resultAllOrdersQuery.allOrders" :key="order.id"
                 class="row justify-content-between align-items-center rounded-3 order-card mb-4" style="margin: auto;">
+                <p>Customer Email: {{ order.email }}</p>
 
-                <div class="col">
+                <div class="col-md-1">
                     <button class="btn btn-outline-primary" v-if="variables.status == 'Pending'"
                         @click="changeStatus('Confirmed', Number(order.id))">Confirm Order</button>
                     <button class="btn btn-outline-success" v-else-if="variables.status == 'Confirmed'"
@@ -250,6 +252,10 @@ async function deleteItem(orderId) {
                 <div class="col-md-1">
                     <p class="fw-normal mb-2">Total Price:</p>
                     <p class="lead fw-normal mb-2">₱{{ order.totalPrice }}</p>
+                </div>
+                <div class="col-md-1">
+                    <p class="fw-normal mb-2">Delivery Fee:</p>
+                    <p class="lead fw-normal mb-2">₱{{ order.delivery.price }}</p>
                 </div>
                 <div class="col-md-1  text-end">
                     <button type="button" class="btn-close" aria-label="Close" @click.stop="deleteItem(order.id)"></button>

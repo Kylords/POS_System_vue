@@ -219,7 +219,7 @@ async function orderClick() {
 
 
 const formattedAddress = computed(() => {
-    if (placeOrder.orderType == 'Online') {
+    if (placeOrder.value.orderType == 'Online') {
         const addressComponents = [
         placeOrder.value.roomUnit,
         placeOrder.value.floor,
