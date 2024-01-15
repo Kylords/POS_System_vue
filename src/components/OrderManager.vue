@@ -45,12 +45,15 @@ const { result: resultAllOrdersQuery, loading: loadingAllOrdersQuery, onResult, 
     allOrders(status: $status) {
       id
       totalPrice
-      quantity
+      quantities
       products {
         price
         name
         image
         productType
+        productQuantities {
+        quantity
+      }
       }
 
     }
@@ -221,7 +224,7 @@ async function deleteItem(orderId) {
 
 
                                 <p class="fw-normal mb-2">Quantity: </p>
-                                <p class="fw-normal mb-2">{{ product.quantity }}</p>
+                                <p class="fw-normal mb-2">{{ product.productQuantities[0].quantity }}</p>
 
 
                             </div>
