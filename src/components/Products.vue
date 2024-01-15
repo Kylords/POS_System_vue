@@ -116,7 +116,6 @@ onProductResult(result => {
             var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
             myModal.show();
             myModal._element.addEventListener('hidden.bs.modal', function () {
-                details.value.quantity = 1
                 myModal.hide();
             });
         }
