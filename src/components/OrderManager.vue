@@ -242,6 +242,16 @@ async function deleteItem(orderId) {
 
                             </div>
 
+                            <div class="col-md-2 col-lg-2 col-xl-2">
+
+
+                                <p class="fw-normal mb-2">Total Product Price: </p>
+                                <p class="fw-normal mb-2">₱{{ Number(product.price) * Number(product.productQuantities[0].quantity) }}</p>
+
+
+                            </div>
+
+
 
 
 
